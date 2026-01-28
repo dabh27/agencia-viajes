@@ -1,0 +1,79 @@
+.home-container {
+  padding-bottom: 4rem;
+}
+
+/* HERO SECTION CON DEGRADADO */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary) 0%, #1a252f 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 0 0 50% 50% / 20px; /* Curva sutil abajo */
+  margin-bottom: 3rem;
+}
+
+.hero-content h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+/* GRID DE TARJETAS */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Efecto de flotar */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  border-color: var(--accent);
+}
+
+.icon-bg {
+  font-size: 2.5rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+}
+
+.color-1 { background-color: #E3F2FD; } 
+.color-2 { background-color: #FFF3E0; } 
+.color-3 { background-color: #E8F5E9; } 
+
+.card h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.4rem;
+}
+
+.card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
