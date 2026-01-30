@@ -1,0 +1,22 @@
+.footer {
+  background-color: var(--primary); /* Mantiene tu color azul elegante */
+  color: white;
+  padding: 2rem;       /* Espacio equilibrado arriba y abajo */
+  margin-top: auto;    /* Esto mantiene el footer pegado abajo si la pag es corta */
+  
+  /* ESTAS 3 LÍNEAS LO PONEN EN EL MEDIO: */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Alinea verticalmente */
+  text-align: center;      /* Asegura que el texto esté centrado */
+}
+
+.footer-content p {
+  margin: 5px 0; /* Un pequeño espacio entre las dos líneas de texto */
+}
+
+.team {
+  font-size: 0.85rem;  /* Un poquito más pequeño */
+  opacity: 0.7;        /* Un poco transparente para darle jerarquía visual */
+  font-weight: 300;
+}

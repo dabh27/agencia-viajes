@@ -1,0 +1,81 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  padding: 1rem 3rem;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra sutil */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+}
+
+.brand-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #7f8c8d; /* Gris suave */
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary);
+}
+
+/* El efecto de la línea debajo al pasar el mouse */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.btn-login {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-login:hover {
+  background-color: var(--primary);
+  color: white;
+}

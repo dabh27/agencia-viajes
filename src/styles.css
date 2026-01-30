@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --primary: #2C3E50;    /* Azul oscuro elegante */
+  --secondary: #FF6B6B;  /* Coral vibrante (Botones/Acción) */
+  --accent: #4ECDC4;     /* Turquesa (Detalles) */
+  --bg-light: #F7F9FC;   /* Fondo general */
+  --text-dark: #333333;
+  --white: #ffffff;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08); /* Sombra suave moderna */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif; /* Fuente para títulos */
+  color: var(--primary);
+}
+
+/* Botones Globales bonitos */
+.btn-primary {
+  background-color: var(--secondary);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+* { box-sizing: border-box; }

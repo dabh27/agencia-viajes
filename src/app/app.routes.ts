@@ -1,14 +1,32 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { ReservaComponent } from './pages/reserva/reserva.component';
-import { HomeComponent } from './pages/home/home.component';
-import { DetalleDestinoComponent } from './pages/detalle-destino/detalle-destino.component';
-import { DestinosComponent } from './pages/destinos/destinos.component';
+import { HomeComponent } from './components/view/home/home.component';
+import { NotFoundComponent } from './components/view/not-found/not-found.component';
+
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'destinos', component: DestinosComponent },
-    { path: 'destino/:id', component: DetalleDestinoComponent },
-    { path: 'reserva/:id', component: ReservaComponent },
-    { path: 'login', component: LoginComponent },
+  // Módulo: Autenticación 
+
+  // Módulo: Clientes 
+  { 
+    path: 'clientes', 
+    loadChildren: () => import('./pages/cliente/cliente.routes').then(m => m.CLIENTE_ROUTES) 
+  },
+  // Módulo: Reservas 
+  { 
+    path: 'reservas', 
+    loadChildren: () => import('./pages/reserva/reserva.routes').then(m => m.RESERVA_ROUTES) 
+  },
+  // Módulo: Pagos/Facturas 
+  { 
+    path: 'pagos', 
+    loadChildren: () => import('./pages/pagos/pagos.routes').then(m => m.PAGOS_ROUTES) 
+  },
+
+  // Vistas Generales
+  { path: 'home', component: HomeComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  
+  // Redirecciones
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'not-found' }
 ];

@@ -1,0 +1,92 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 2rem;
+  /* Fondo radial suave */
+  background: radial-gradient(circle at center, #ffffff 0%, var(--bg-light) 100%);
+  overflow: hidden; /* Evita scrollbars innecesarios */
+}
+
+/* Ajustes de la ilustración SVG */
+.illustration-container {
+  width: 100%;
+  max-width: 600px; /* Un poco más ancho para dar aire */
+  margin-bottom: 2rem;
+  padding-top: 20px; /* Espacio extra de seguridad arriba */
+}
+
+.travigo-404-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible; /* IMPORTANTE: Permite que las animaciones salgan un poco del marco si es necesario */
+}
+
+/* Tipografía */
+.text-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.text-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+/* --- ANIMACIONES --- */
+
+/* 1. Flotación del mapa */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(-10deg); }
+  50% { transform: translateY(-20px) rotate(-12deg); } /* Sube 20px */
+  100% { transform: translateY(0px) rotate(-10deg); }
+}
+
+.floating-map {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* 2. Nubes */
+@keyframes drift {
+  from { transform: translateX(-50px); opacity: 0; }
+  50% { opacity: 0.5; }
+  to { transform: translateX(50px); opacity: 0; }
+}
+
+.cloud-1 {
+  animation: drift 15s linear infinite;
+}
+
+.cloud-2 {
+  animation: drift 20s linear infinite reverse;
+}
+
+/* 3. Signos de interrogación */
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+.question-mark-anim {
+  animation: pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Botón con brillo */
+.btn-glow {
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
