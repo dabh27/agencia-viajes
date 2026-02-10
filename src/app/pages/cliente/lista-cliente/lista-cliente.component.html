@@ -1,1 +1,62 @@
-<p>lista-cliente works!</p>
+<div class="container mt-4">
+  <h2 class="text-center">Viajeros</h2>
+
+  <div class="d-flex justify-content-between my-3">
+    <input
+      type="text"
+      class="form-control w-50"
+      placeholder="Buscar..."
+      [(ngModel)]="filtro"
+      (input)="filtrarClientes()"
+    />
+    <button class="btn btn-primary" (click)="registrarCliente()">Registrar</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th> 
+        <th>Cédula</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tbody>
+        <tr
+          *ngFor="let cliente of clientesFiltrados"
+          (click)="seleccionarCliente(cliente.idCliente)"
+          [class.selected]="clienteSeleccionadoId === cliente.idCliente"
+        >
+          <td>{{ cliente.nombres }}</td>
+          <td>{{ cliente.apellidos }}</td>
+          <td>{{ cliente.cedula }}</td>
+          <td>{{ cliente.correo }}</td>
+          <td>{{ cliente.telefono }}</td>
+
+          <td>
+            <ng-container *ngIf="clienteSeleccionadoId === cliente.idCliente">
+              <button
+                class="btn btn-sm btn-info me-2"
+                (click)="editarCliente(cliente.idCliente); $event.stopPropagation()"
+              >
+                Modificar
+              </button>
+
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="eliminarCliente(cliente.idCliente); $event.stopPropagation()"
+              >
+                Eliminar
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+
+      </tbody>
+
+  </table>
+</div>

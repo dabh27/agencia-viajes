@@ -1,40 +1,48 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Cliente } from '../models/cliente.models';
+import { Observable } from 'rxjs';
+import { JsonResponse } from '../models/api-response.model';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ClientesService {
-  private http = inject(HttpClient);
-  private apiUrl = 'https://localhost:7088/api/clientes'; 
+export class ClienteService {
+  private apiUrl = 'https://localhost:7088/api/clientes'; // Asegúrate que es tu URL real
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  // 1. Obtener todos (Para la tabla)
-  getClientes(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${this.apiUrl}/Getlist`);
+  getClientes(): Observable<JsonResponse<Cliente[]>> {
+    return this.http.get<JsonResponse<Cliente[]>>(
+      `${this.apiUrl}/Getlist`
+    );
   }
 
-  // 2. Obtener uno por ID (Para editar)
-  getCliente(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
+
+  getCliente(id: number): Observable<JsonResponse<Cliente>> {
+    return this.http.get<JsonResponse<Cliente>>(
+      `${this.apiUrl}/${id}`
+    );
   }
 
-  // 3. Crear nuevo
-  crearCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(`${this.apiUrl}/Create`, cliente);
+  crearCliente(cliente: Cliente): Observable<JsonResponse<Cliente>> {
+    return this.http.post<JsonResponse<Cliente>>(
+      `${this.apiUrl}/Create`,
+      cliente
+    );
   }
 
-  // 4. Actualizar existente
-  actualizarCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrl}/Update`, cliente);
+  actualizarCliente(cliente: Cliente): Observable<JsonResponse<Cliente>> {
+    return this.http.put<JsonResponse<Cliente>>(
+      `${this.apiUrl}/Update`,
+      cliente
+    );
   }
 
-  // 5. Eliminar
-  eliminarCliente(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  eliminarCliente(id: number): Observable<JsonResponse<Cliente>> {
+    return this.http.delete<JsonResponse<Cliente>>(
+      `${this.apiUrl}/${id}`
+    );
   }
 }

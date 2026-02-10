@@ -1,1 +1,50 @@
-<p>actualizar-cliente works!</p>
+<div class="card">
+  <h2 class="section-title">Actualizar Cliente</h2>
+
+  <form [formGroup]="clienteForm" (ngSubmit)="actualizar()" class="form">
+
+    <div class="form-group">
+      <label>Nombres</label>
+      <input type="text" formControlName="nombres" />
+    </div>
+
+    <div class="form-group">
+      <label>Apellidos</label>
+      <input type="text" formControlName="apellidos" />
+    </div>
+
+    <div class="form-group">
+      <label>Cédula</label>
+      <input type="text" formControlName="cedula" />
+    </div>
+
+    <div class="form-group">
+      <label>Correo</label>
+      <input type="email" formControlName="correo" />
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="text" formControlName="telefono" />
+    </div>
+
+    <div class="acciones">
+    <button
+      type="button"
+      class="btn-volver"
+      (click)="volver()"
+    >
+      Volver
+    </button>
+
+    <button
+      type="submit"
+      class="btn-registrar"
+    >
+      Actualizar
+    </button>
+  </div>
+
+
+  </form>
+</div>

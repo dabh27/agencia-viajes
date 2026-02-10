@@ -1,0 +1,100 @@
+/* Contenedor principal */
+.card {
+  max-width: 420px;
+  margin: 4rem auto;
+  padding: 2.5rem 2.8rem;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.6s ease;
+}
+
+/* Título */
+.section-title {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+/* Formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* Grupo de inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #34495e;
+}
+
+/* Inputs */
+input {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+/* Botón */
+.btn-registrar {
+  margin-top: 1.2rem;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-registrar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(255, 107, 107, 0.4);
+}
+
+/* Error */
+.error {
+  text-align: center;
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #e74c3c;
+  font-weight: 600;
+  font-size: 0.95rem;
+}

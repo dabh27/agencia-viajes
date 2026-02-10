@@ -1,24 +1,42 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LoginRequest, UsuarioRespuesta } from '../models/usuario.model';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'; // 1. Importamos HttpParams
+import { JsonResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private http = inject(HttpClient);
+
+
   private apiUrl = 'https://localhost:7088/api/Usuario';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  login(credenciales: LoginRequest): Observable<UsuarioRespuesta> {
-    return this.http.post<UsuarioRespuesta>(`${this.apiUrl}/login`, credenciales);
-  }
+  login(credentials: { correo: string; clave: string }) {
+    
+    
+    const params = new HttpParams()
+      .set('correo', credentials.correo)
+      .set('clave', credentials.clave);
+
   
-  // Método útil para saber si está logueado (puedes mejorarlo luego guardando el token)
+    return this.http.post<JsonResponse<any>>(
+      `${this.apiUrl}/login`, 
+      null, 
+      { params: params } 
+    );
+  }
+
+  guardarSesion(usuario: any): void {
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('token', 'logueado'); 
+  }
+
   estaLogueado(): boolean {
-    // Lógica simple: si hay algo en localStorage, devuelve true
-    return localStorage.getItem('usuario') ? true : false;
+    return !!localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.clear();
   }
 }

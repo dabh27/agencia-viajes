@@ -79,3 +79,8 @@
   background-color: var(--primary);
   color: white;
 }
+
+.bloqueado {
+  opacity: 0.5;
+  pointer-events: none;
+}

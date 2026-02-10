@@ -1,0 +1,12 @@
+tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+tr:hover {
+  background-color: #f4f6f8;
+}
+
+tr.selected {
+  background-color: #eaf2ff;
+}

@@ -1,14 +1,29 @@
 <nav class="navbar">
-  <a routerLink="/" class="brand">
+  <a class="brand" (click)="irARuta('/home')">
     <span class="brand-icon">✈️</span>
-    <span class="brand-text">TraviGo</span> </a>
-  
+    <span class="brand-text">TraviGo</span>
+  </a>
+
   <ul class="nav-links">
-    <li><a routerLink="/home" routerLinkActive="active" class="nav-link">Inicio</a></li>
-    <li><a routerLink="/clientes" routerLinkActive="active" class="nav-link">Viajeros</a></li>
-    <li><a routerLink="/reservas" routerLinkActive="active" class="nav-link">Reservas</a></li>
-    <li><a routerLink="/pagos" routerLinkActive="active" class="nav-link">Pagos</a></li>
+    <li>
+      <a class="nav-link" (click)="irARuta('/home')">Inicio</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="irARuta('/cliente/lista')">Viajeros</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="irARuta('/reservas')">Reservas</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="irARuta('/pagos')">Pagos</a>
+    </li>
   </ul>
 
-  <button class="btn-login" routerLink="/login">Ingresar</button>
+  <!-- Botón dinámico -->
+  <button
+    class="btn-login"
+    (click)="accionSesion()"
+  >
+    {{ authService.estaLogueado() ? 'Cerrar sesión' : 'Iniciar sesión' }}
+  </button>
 </nav>
