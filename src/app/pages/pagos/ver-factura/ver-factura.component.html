@@ -1,0 +1,93 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    
+    <div class="toolbar">
+      <button class="btn-cancel" (click)="cerrarModal()">Cerrar</button>
+      <button class="btn-download" (click)="descargarPDF()">
+        {{ descargando ? 'Generando...' : '📥 Descargar PDF' }}
+      </button>
+    </div>
+
+    <div id="factura-visual" class="hoja-a4">
+      
+      <header class="header">
+        <div class="logo-section">
+          <h1 class="marca">✈️ TraviGo</h1>
+          <p class="slogan">Agencia de Viajes & Turismo</p>
+        </div>
+        <div class="info-empresa">
+          <p><strong>RUC:</strong> 0999999999001</p>
+          <p>Av. Francisco de Orellana, Guayaquil</p>
+          <p>contacto&#64;travigo.com</p>
+        </div>
+      </header>
+
+      <hr class="divider">
+
+      <div class="datos-row">
+        <div class="col-cliente">
+          <h3>Facturar a:</h3>
+          <p><strong>Cliente:</strong> {{ factura?.cliente }}</p>
+          <p><strong>Dirección:</strong> Domicilio Registrado</p> </div>
+        <div class="col-factura">
+          <div class="factura-badge">
+            FACTURA ELECTRÓNICA
+          </div>
+          <p><strong>N°:</strong> {{ factura?.numeroFactura }}</p>
+          <p><strong>Fecha:</strong> {{ factura?.fechaEmision | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Estado:</strong> 
+            <span class="status-pagado" *ngIf="factura?.activo">PAGADO</span>
+            <span class="status-anulado" *ngIf="!factura?.activo">ANULADO</span>
+          </p>
+        </div>
+      </div>
+
+      <table class="tabla-items">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th class="text-right">Precio Unit.</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Servicio de Transporte Aéreo / Paquete</strong><br>
+              <small>{{ factura?.ruta }}</small>
+            </td>
+            <td class="text-right">{{ factura?.montoTotal | currency:'USD' }}</td>
+            <td class="text-right">{{ factura?.montoTotal | currency:'USD' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totales-section">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span>{{ factura?.montoTotal | currency:'USD' }}</span>
+        </div>
+        <div class="total-row">
+          <span>IVA (0%):</span> <span>$0.00</span>
+        </div>
+        <div class="total-row final">
+          <span>TOTAL PAGADO:</span>
+          <span>{{ factura?.montoTotal | currency:'USD' }}</span>
+        </div>
+      </div>
+
+      <div class="sello-pagado" *ngIf="factura?.activo">
+        PAGADO
+      </div>
+      <div class="sello-anulado" *ngIf="!factura?.activo">
+        ANULADO
+      </div>
+
+      <footer class="footer-legal">
+        <p>Gracias por viajar con TraviGo. Este documento es un comprobante electrónico válido.</p>
+      </footer>
+
+    </div>
+
+  </div>
+</div>

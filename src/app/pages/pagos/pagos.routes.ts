@@ -4,6 +4,6 @@ import { ListaFacturaComponent } from './lista-facturas/lista-facturas.component
 
 
 export const PAGOS_ROUTES: Routes = [
-  { path: '', component: ListaFacturaComponent }, // Ruta por defecto (Listado)
-  { path: 'generar', component: RegistrarFacturaComponent } // Ruta para cobrar
+  { path: '', component: ListaFacturaComponent }, 
+  { path: 'generar', component: RegistrarFacturaComponent }
 ];
