@@ -1,0 +1,108 @@
+/* FONDO OSCURO DEL MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  overflow-y: auto; /* Permite scroll si la pantalla es chica */
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* BARRA DE BOTONES */
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  width: 210mm; /* Mismo ancho que la hoja */
+}
+
+.btn-download { background-color: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+.btn-cancel { background-color: #95a5a6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+
+/* HOJA A4 */
+.hoja-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  padding: 20mm;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  position: relative; /* Para posicionar el sello */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+/* DISEÑO INTERNO FACTURA */
+.header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.marca { color: #2c3e50; margin: 0; font-size: 24px; }
+.slogan { color: #7f8c8d; margin: 5px 0 0; }
+.info-empresa { text-align: right; font-size: 12px; line-height: 1.5; }
+
+.divider { border: 0; border-top: 2px solid #2c3e50; margin: 20px 0; }
+
+.datos-row { display: flex; justify-content: space-between; margin-bottom: 40px; }
+.col-cliente h3 { margin-top: 0; color: #2c3e50; }
+.factura-badge { background: #ecf0f1; padding: 5px 10px; font-weight: bold; font-size: 12px; display: inline-block; margin-bottom: 10px; }
+.status-pagado { color: #27ae60; font-weight: bold; }
+.status-anulado { color: #c0392b; font-weight: bold; }
+
+/* TABLA */
+.tabla-items { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+.tabla-items th { background: #2c3e50; color: white; padding: 10px; text-align: left; font-size: 12px; }
+.tabla-items td { border-bottom: 1px solid #eee; padding: 12px 10px; font-size: 14px; }
+.text-right { text-align: right; }
+
+/* TOTALES */
+.totales-section { width: 40%; margin-left: auto; }
+.total-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 14px; }
+.total-row.final { font-size: 18px; font-weight: bold; border-top: 2px solid #2c3e50; margin-top: 10px; padding-top: 10px; color: #2c3e50; }
+
+/* SELLOS DE AGUA */
+.sello-pagado {
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 80px;
+  font-weight: bold;
+  color: rgba(39, 174, 96, 0.2); /* Verde Transparente */
+  border: 5px solid rgba(39, 174, 96, 0.2);
+  padding: 10px 40px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.sello-anulado {
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 80px;
+  font-weight: bold;
+  color: rgba(192, 57, 43, 0.2); /* Rojo Transparente */
+  border: 5px solid rgba(192, 57, 43, 0.2);
+  padding: 10px 40px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.footer-legal {
+  position: absolute;
+  bottom: 20mm;
+  left: 20mm;
+  right: 20mm;
+  text-align: center;
+  font-size: 10px;
+  color: #7f8c8d;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
-
 import { ReservaListar } from '../../../models/reserva.model';
+
+import { VerFacturaComponent } from '../ver-factura/ver-factura.component';
 import { FacturaListar } from '../../../models/factura.models';
 import { FacturaService } from '../../../services/facturas.service';
 import { ReservaService } from '../../../services/reservas.service';
@@ -11,7 +12,7 @@ import { ReservaService } from '../../../services/reservas.service';
 @Component({
   selector: 'app-lista-factura',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, VerFacturaComponent],
   templateUrl: './lista-facturas.component.html',
   styleUrls: ['./lista-facturas.component.css']
 })
@@ -22,7 +23,6 @@ export class ListaFacturaComponent implements OnInit {
   listaPendientes: ReservaListar[] = []; 
 
   // --- VISTA ACTUAL ---
-  
   vistaActual: string = 'pendientes'; 
   
   // Datos filtrados para la tabla de historial
@@ -30,6 +30,10 @@ export class ListaFacturaComponent implements OnInit {
 
   cargando: boolean = true;
   error: string | null = null;
+
+  // --- CONTROL DEL MODAL DE FACTURA (NUEVO) ---
+  facturaSeleccionada: FacturaListar | null = null;
+  mostrarModalFactura: boolean = false;
 
   constructor(
     private facturaService: FacturaService,
@@ -51,7 +55,7 @@ export class ListaFacturaComponent implements OnInit {
           this.listaFacturas = resp.data;
           this.filtrarHistorial(); 
         }
-       
+        
       },
       error: () => this.cargando = false
     });
@@ -85,8 +89,18 @@ export class ListaFacturaComponent implements OnInit {
 
   // --- ACCIÓN RÁPIDA: COBRAR ---
   irAFacturar(idReserva: number) {
-  
     this.router.navigate(['/pagos/generar'], { queryParams: { reserva: idReserva } });
+  }
+
+  // --- ACCIÓN: VER FACTURA (NUEVO) ---
+  verFactura(factura: FacturaListar) {
+    this.facturaSeleccionada = factura;
+    this.mostrarModalFactura = true;
+  }
+
+  cerrarModal() {
+    this.mostrarModalFactura = false;
+    this.facturaSeleccionada = null;
   }
 
   // --- ACCIÓN: ANULAR ---
@@ -97,6 +111,7 @@ export class ListaFacturaComponent implements OnInit {
       if(resp.success) {
         alert('Factura anulada correctamente');
         this.cargarDatos(); 
+      } else {
         alert(resp.message);
       }
     });

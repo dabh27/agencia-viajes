@@ -101,9 +101,16 @@
               {{ item.activo ? 'Pagada' : 'Anulada' }}
             </span>
           </td>
-          <td>
-            <button *ngIf="item.activo" class="btn-icon delete" (click)="anular(item.idFactura)" title="Anular Factura">🚫</button>
-            <span *ngIf="!item.activo" style="color:#ccc">—</span>
+          <td class="acciones">
+            <button class="btn-icon print" (click)="verFactura(item)" title="Ver Factura / Imprimir">
+                🖨️
+            </button>
+
+            <button *ngIf="item.activo" class="btn-icon delete" (click)="anular(item.idFactura)" title="Anular Factura">
+                🚫
+            </button>
+            
+            <span *ngIf="!item.activo" style="color:#ccc; font-size: 0.8rem;">(Anulada)</span>
           </td>
         </tr>
       </tbody>
@@ -113,5 +120,11 @@
       ℹ️ No hay facturas en esta sección.
     </div>
   </div>
+
+  <app-ver-factura 
+    *ngIf="mostrarModalFactura" 
+    [factura]="facturaSeleccionada" 
+    (cerrar)="cerrarModal()">
+  </app-ver-factura>
 
 </div>
