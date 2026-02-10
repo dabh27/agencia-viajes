@@ -1,0 +1,234 @@
+/* CONTENEDOR PRINCIPAL */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HEADER */
+.header-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 15px;
+}
+
+.header-form h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #7f8c8d;
+  border: 1px solid #bdc3c7;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #f7f9fa;
+  color: #2c3e50;
+  border-color: #95a5a6;
+}
+
+/* FORMULARIO GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* INPUTS Y LABELS */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #34495e;
+  font-size: 0.9rem;
+}
+
+.form-group select {
+  padding: 12px;
+  border: 1px solid #dfe6e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Estilo especial para el select principal */
+.input-grande {
+  background-color: #f0f8ff; /* Azul muy clarito */
+  border-color: #b3e5fc;
+  font-weight: 600;
+  color: #0277bd;
+}
+
+.hint {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #95a5a6;
+}
+
+/* === TARJETA DE RESUMEN (TICKET) === */
+.resumen-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.resumen-header {
+  background-color: #2c3e50; /* Encabezado oscuro */
+  color: white;
+  padding: 10px 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.resumen-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas para los datos */
+  gap: 15px;
+}
+
+.dato {
+  display: flex;
+  flex-direction: column;
+}
+
+.dato span {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.dato strong {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Separador */
+.separator {
+  grid-column: 1 / -1;
+  height: 1px;
+  background-color: #ecf0f1;
+  margin: 10px 0;
+  border-top: 1px dashed #bdc3c7; /* Línea punteada tipo ticket */
+}
+
+/* Fila del Total */
+.total-row {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e8f8f5; /* Fondo verde suave */
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.total-row span {
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #16a085;
+  font-size: 1rem;
+}
+
+.precio-final {
+  font-size: 1.8rem !important;
+  color: #27ae60 !important;
+  font-weight: 800;
+}
+
+/* BOTÓN DE ACCIÓN */
+.actions {
+  margin-top: 10px;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #219150;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.btn-primary:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ERROR ALERT */
+.alert-danger {
+  background-color: #fadbd8;
+  color: #c0392b;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #f1948a;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  
+  .resumen-body {
+    grid-template-columns: 1fr;
+  }
+}

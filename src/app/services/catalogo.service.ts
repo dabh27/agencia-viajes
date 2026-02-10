@@ -24,4 +24,8 @@ export class CatalogoService {
   getTiposPasaje(): Observable<JsonResponse<any[]>> {
     return this.http.get<JsonResponse<any[]>>(`${this.apiUrl}/tipos-pasaje`);
   }
+  
+   getMetodosPago(): Observable<JsonResponse<any[]>> {
+    return this.http.get<JsonResponse<any[]>>(`${this.apiUrl}/metodos-pago`);
+}
 }

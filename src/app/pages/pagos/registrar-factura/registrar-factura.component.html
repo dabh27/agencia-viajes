@@ -1,0 +1,69 @@
+<div class="container">
+  
+  <div class="header-form">
+    <h2>💰 Registrar Pago y Facturar</h2>
+    <button class="btn-secondary" routerLink="../">
+      🔙 Volver al Panel
+    </button>
+  </div>
+
+  <form [formGroup]="formFactura" (ngSubmit)="guardar()" class="form-grid">
+
+    <div class="form-group full-width">
+      <label>Seleccionar Reserva Pendiente *</label>
+      <select formControlName="idReserva" (change)="seleccionarReserva()" class="input-grande">
+        <option value="">-- Busque la reserva a cobrar --</option>
+        <option *ngFor="let r of listaReservasPendientes" [value]="r.idReserva">
+          {{ r.codigoReserva }} - {{ r.cliente }} ({{ r.ruta }})
+        </option>
+      </select>
+      <small class="hint">Solo aparecen reservas confirmadas y no facturadas.</small>
+    </div>
+
+    <div class="resumen-card full-width" *ngIf="reservaSeleccionada">
+      <div class="resumen-header">
+        📋 Detalle del Cobro
+      </div>
+      <div class="resumen-body">
+        <div class="dato">
+          <span>Cliente:</span>
+          <strong>{{ reservaSeleccionada.cliente }}</strong>
+        </div>
+        <div class="dato">
+          <span>Ruta / Servicio:</span>
+          <strong>{{ reservaSeleccionada.ruta }}</strong>
+        </div>
+        <div class="dato">
+          <span>Fecha Viaje:</span>
+          <strong>{{ reservaSeleccionada.fechaIda | date:'dd/MM/yyyy h:mm a' }}</strong>
+        </div>
+        
+        <div class="separator"></div>
+
+        <div class="dato total-row">
+          <span>Total a Pagar:</span>
+          <strong class="precio-final">{{ reservaSeleccionada.precio | currency:'USD' }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Método de Pago *</label>
+      <select formControlName="idMetodoPago">
+        <option value="">-- Seleccione --</option>
+        <option *ngFor="let m of listaMetodosPago" [value]="m.id">{{ m.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="full-width" *ngIf="error">
+      <div class="alert alert-danger">❌ {{ error }}</div>
+    </div>
+
+    <div class="full-width actions">
+      <button type="submit" class="btn-primary" [disabled]="enviando || formFactura.invalid || !reservaSeleccionada">
+        {{ enviando ? 'Procesando...' : '💸 Confirmar Pago y Facturar' }}
+      </button>
+    </div>
+
+  </form>
+</div>

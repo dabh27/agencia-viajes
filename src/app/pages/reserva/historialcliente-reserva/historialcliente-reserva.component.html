@@ -1,12 +1,12 @@
 <div class="container">
   
   <div class="header-form">
-    <h2>📂 Historial por Cliente</h2>
-    <button class="btn-secondary" routerLink="../">Volver al Listado</button>
+    <h2>📂 Expediente del Cliente</h2>
+    <button class="btn-secondary" routerLink="../">Volver</button>
   </div>
 
   <div class="search-box">
-    <label>Seleccione un Cliente para ver su historial:</label>
+    <label>Buscar Cliente:</label>
     <select [(ngModel)]="idClienteSeleccionado" (change)="filtrarHistorial()" class="input-grande">
       <option value="">-- Seleccione Cliente --</option>
       <option *ngFor="let c of listaClientes" [value]="c.idCliente">
@@ -15,44 +15,96 @@
     </select>
   </div>
 
-  <div class="resumen-card" *ngIf="reservasFiltradas.length > 0">
-    <div class="dato">
-      <span>Total Reservas</span>
-      <strong>{{ totalReservas }}</strong>
+  <div class="resumen-dashboard" *ngIf="idClienteSeleccionado !== ''">
+    
+    <div class="kpi-card blue">
+      <div class="icon">✈️</div>
+      <div class="info">
+        <span>Total Reservado</span>
+        <strong>{{ totalGastoReservas | currency:'USD' }}</strong>
+        <small>{{ reservasFiltradas.length }} viajes registrados</small>
+      </div>
     </div>
-    <div class="dato" style="color: #27ae60;">
-      <span>Inversión Total</span>
-      <strong>{{ totalGasto | currency:'USD' }}</strong>
+
+    <div class="kpi-card green">
+      <div class="icon">💳</div>
+      <div class="info">
+        <span>Total Facturado</span>
+        <strong>{{ totalPagadoFacturas | currency:'USD' }}</strong>
+        <small>{{ facturasFiltradas.length }} documentos emitidos</small>
+      </div>
     </div>
+
   </div>
 
-  <div *ngIf="idClienteSeleccionado !== '' && reservasFiltradas.length === 0" class="alert">
-    ℹ️ Este cliente no tiene reservas registradas en el sistema.
+  <div class="nav-tabs" *ngIf="idClienteSeleccionado !== ''">
+    <button [class.active]="vistaActual === 'reservas'" (click)="cambiarVista('reservas')">
+      Historial de Viajes
+    </button>
+    <button [class.active]="vistaActual === 'facturas'" (click)="cambiarVista('facturas')">
+      Historial de Facturas
+    </button>
   </div>
 
-  <table class="table" *ngIf="reservasFiltradas.length > 0">
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Ruta</th>
-        <th>Fecha Viaje</th>
-        <th>Estado</th>
-        <th>Valor</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of reservasFiltradas">
-        <td><strong>{{ item.codigoReserva }}</strong></td>
-        <td>{{ item.ruta }}</td>
-        <td>{{ item.fechaIda | date:'dd/MM/yyyy' }}</td>
-        <td>
-          <span [class]="item.activo ? 'badge-activo' : 'badge-inactivo'">
-            {{ item.activo ? 'Confirmada' : 'Cancelada' }}
-          </span>
-        </td>
-        <td style="font-weight: bold;">{{ item.precio | currency:'USD' }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="vistaActual === 'reservas' && reservasFiltradas.length > 0" class="table-container fade-in">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Ruta</th>
+          <th>Fecha Viaje</th>
+          <th>Estado</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of reservasFiltradas">
+          <td><strong>{{ item.codigoReserva }}</strong></td>
+          <td>{{ item.ruta }}</td>
+          <td>{{ item.fechaIda | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span [class]="item.activo ? 'badge-activo' : 'badge-inactivo'">
+              {{ item.activo ? 'Confirmada' : 'Cancelada' }}
+            </span>
+          </td>
+          <td class="precio">{{ item.precio | currency:'USD' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="vistaActual === 'facturas' && facturasFiltradas.length > 0" class="table-container fade-in">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>N° Factura</th>
+          <th>Concepto</th>
+          <th>Fecha Emisión</th>
+          <th>Estado</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of facturasFiltradas">
+          <td><strong>{{ item.numeroFactura }}</strong></td>
+          <td>{{ item.ruta }}</td>
+          <td>{{ item.fechaEmision | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span [class]="item.activo ? 'badge-activo' : 'badge-inactivo'">
+              {{ item.activo ? 'Pagada' : 'Anulada' }}
+            </span>
+          </td>
+          <td class="precio">{{ item.montoTotal | currency:'USD' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="idClienteSeleccionado !== '' && 
+       ((vistaActual === 'reservas' && reservasFiltradas.length === 0) || 
+        (vistaActual === 'facturas' && facturasFiltradas.length === 0))" 
+       class="alert">
+    ℹ️ No hay registros en esta sección para el cliente seleccionado.
+  </div>
 
 </div>
