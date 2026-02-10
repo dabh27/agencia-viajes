@@ -1,1 +1,117 @@
-<p>lista-facturas works!</p>
+<div class="container">
+  
+  <div class="header-actions">
+    <div class="title-section">
+      <h2>💳 Panel de Facturación</h2>
+      <p class="subtitle">Gestión de cobros y documentos fiscales</p>
+    </div>
+
+    <button class="btn-primary" routerLink="generar">
+      + Nueva Factura Manual
+    </button>
+  </div>
+
+  <div class="filter-section">
+    <span class="filter-label">Vista:</span>
+    <div class="tabs-capsule">
+      
+      <button class="tab-btn warning" 
+        [class.active]="vistaActual === 'pendientes'" 
+        (click)="cambiarVista('pendientes')">
+        ⚠️ Por Cobrar ({{ listaPendientes.length }})
+      </button>
+
+      <button class="tab-btn success" 
+        [class.active]="vistaActual === 'emitidas'" 
+        (click)="cambiarVista('emitidas')">
+        ✅ Emitidas
+      </button>
+
+      <button class="tab-btn danger" 
+        [class.active]="vistaActual === 'anuladas'" 
+        (click)="cambiarVista('anuladas')">
+        ❌ Anuladas
+      </button>
+
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="alert info">⏳ Cargando información contable...</div>
+  <div *ngIf="error" class="alert error">❌ {{ error }}</div>
+
+
+  <div *ngIf="!cargando && vistaActual === 'pendientes'">
+    
+    <table class="table" *ngIf="listaPendientes.length > 0">
+      <thead>
+        <tr>
+          <th>Cod. Reserva</th>
+          <th>Cliente</th>
+          <th>Ruta / Servicio</th>
+          <th>Fecha Viaje</th>
+          <th>Monto a Cobrar</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listaPendientes">
+          <td><strong>{{ item.codigoReserva }}</strong></td>
+          <td>{{ item.cliente }}</td>
+          <td>{{ item.ruta }}</td>
+          <td>{{ item.fechaIda | date:'dd/MM/yyyy' }}</td>
+          <td class="precio-pendiente">{{ item.precio | currency:'USD' }}</td>
+          <td>
+            <button class="btn-sm-cobrar" (click)="irAFacturar(item.idReserva)">
+              💸 Cobrar Ahora
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="listaPendientes.length === 0" class="alert success-light">
+      🎉 ¡Excelente! No hay cuentas por cobrar pendientes.
+    </div>
+  </div>
+
+
+  <div *ngIf="!cargando && vistaActual !== 'pendientes'">
+    
+    <table class="table" *ngIf="facturasMostradas.length > 0">
+      <thead>
+        <tr>
+          <th>N° Factura</th>
+          <th>Cliente</th>
+          <th>Concepto</th>
+          <th>Emisión</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of facturasMostradas">
+          <td><strong>{{ item.numeroFactura }}</strong></td>
+          <td>{{ item.cliente }}</td>
+          <td>{{ item.ruta }}</td>
+          <td>{{ item.fechaEmision | date:'dd/MM/yyyy' }}</td>
+          <td class="precio">{{ item.montoTotal | currency:'USD' }}</td>
+          <td>
+            <span [class]="item.activo ? 'badge activo' : 'badge inactivo'">
+              {{ item.activo ? 'Pagada' : 'Anulada' }}
+            </span>
+          </td>
+          <td>
+            <button *ngIf="item.activo" class="btn-icon delete" (click)="anular(item.idFactura)" title="Anular Factura">🚫</button>
+            <span *ngIf="!item.activo" style="color:#ccc">—</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="facturasMostradas.length === 0" class="alert warning">
+      ℹ️ No hay facturas en esta sección.
+    </div>
+  </div>
+
+</div>

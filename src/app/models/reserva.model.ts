@@ -25,4 +25,5 @@ export interface ReservaListar {
     cantidadPasajes: number;
     precio: number;
     activo: boolean;
+    yaFacturada: boolean;
 }
