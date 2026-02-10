@@ -1,1 +1,85 @@
-<p>lista-reserva works!</p>
+<div class="container">
+  
+  <div class="header-actions">
+    <div class="title-section">
+      <h2>✈️ Gestión de Reservas</h2>
+      <p class="subtitle">Administra y consulta los vuelos registrados</p>
+    </div>
+
+    <div class="buttons-wrapper">
+      <button class="btn-outline" routerLink="historial">
+        📂 Historial Cliente
+      </button>
+
+      <button class="btn-primary" routerLink="registrar">
+        + Nueva Reserva
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <span class="filter-label">Filtrar por:</span>
+    
+    <div class="tabs-capsule">
+      <button class="tab-btn" 
+        [class.active]="filtroEstado === 'todos'"
+        (click)="cambiarFiltro('todos')">
+        📋 Todas
+      </button>
+
+      <button class="tab-btn success" 
+        [class.active]="filtroEstado === 'activos'"
+        (click)="cambiarFiltro('activos')">
+        ✅ Confirmadas
+      </button>
+
+      <button class="tab-btn danger" 
+        [class.active]="filtroEstado === 'inactivos'"
+        (click)="cambiarFiltro('inactivos')">
+        ❌ Canceladas
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="alert info">⏳ Cargando reservas...</div>
+  <div *ngIf="error" class="alert error">❌ {{ error }}</div>
+
+  <table class="table" *ngIf="!cargando && reservasMostradas.length > 0">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Cliente</th>
+        <th>Ruta</th>
+        <th>Fecha Ida</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reservasMostradas">
+        <td><strong>{{ item.codigoReserva }}</strong></td>
+        <td>{{ item.cliente }}</td>
+        <td>{{ item.ruta }}</td>
+        <td>{{ item.fechaIda | date:'dd/MM/yyyy' }}</td>
+        <td class="precio">{{ item.precio | currency:'USD' }}</td>
+
+        <td>
+          <span [class]="item.activo ? 'badge activo' : 'badge inactivo'">
+            {{ item.activo ? 'Confirmada' : 'Cancelada' }}
+          </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-icon edit" [routerLink]="['actualizar', item.idReserva]">✏️</button>
+          <button *ngIf="item.activo" class="btn-icon delete" (click)="eliminar(item.idReserva)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!cargando && reservasMostradas.length === 0" class="alert warning">
+    ℹ️ No hay reservas con el filtro seleccionado.
+  </div>
+
+</div>

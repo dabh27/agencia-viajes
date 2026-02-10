@@ -4,7 +4,7 @@
   align-items: center;
   background-color: var(--white);
   padding: 1rem 3rem;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra sutil */
+  box-shadow: 0 2px 15px rgba(220, 6, 6, 0.05); /* Sombra sutil */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -65,7 +65,7 @@
 }
 
 .btn-login {
-  background-color: transparent;
+  background-color: #f1dada;
   border: 2px solid var(--primary);
   color: var(--primary);
   padding: 8px 20px;

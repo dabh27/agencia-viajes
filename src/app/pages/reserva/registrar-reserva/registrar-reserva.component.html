@@ -1,1 +1,90 @@
-<p>registrar-reserva works!</p>
+<div class="container">
+  <div class="header-form">
+    <h2>📝 Nueva Reserva</h2>
+    <button class="btn-secondary" routerLink="../">Volver</button>
+  </div>
+
+  <form [formGroup]="formReserva" (ngSubmit)="guardar()" class="form-grid">
+
+    <div class="form-group">
+      <label>Cliente *</label>
+      <select formControlName="idCliente">
+        <option value="">-- Seleccione Cliente --</option>
+        <option *ngFor="let c of listaClientes" [value]="c.idCliente">
+          {{ c.nombres }} {{ c.apellidos }} ({{ c.cedula }})
+        </option>
+      </select>
+      <small class="error-msg" *ngIf="formReserva.get('idCliente')?.touched && formReserva.get('idCliente')?.invalid">
+        Requerido.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>Código</label>
+      <input type="text" formControlName="codigoReserva" readonly style="background-color: #e9ecef;">
+    </div>
+
+    <div class="form-group">
+      <label>Ciudad Origen *</label>
+      <select formControlName="idCiudadOrigen">
+        <option value="">-- Origen --</option>
+        <option *ngFor="let item of listaCiudades" [value]="item.id">{{ item.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Ciudad Destino *</label>
+      <select formControlName="idCiudadDestino">
+        <option value="">-- Destino --</option>
+        <option *ngFor="let item of listaCiudades" [value]="item.id">{{ item.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Fecha Ida *</label>
+      <input type="datetime-local" formControlName="fechaIda">
+    </div>
+
+    <div class="form-group">
+      <label>Fecha Vuelta</label>
+      <input type="datetime-local" formControlName="fechaVuelta">
+    </div>
+
+    <div class="form-group">
+      <label>Tipo Pasajero</label>
+      <select formControlName="idTipoPasajero">
+        <option value="">-- Seleccione --</option>
+        <option *ngFor="let item of listaTipoPasajero" [value]="item.id">{{ item.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Clase</label>
+      <select formControlName="idTipoPasaje">
+        <option value="">-- Seleccione --</option>
+        <option *ngFor="let item of listaTipoPasaje" [value]="item.id">{{ item.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Pasajes</label>
+      <input type="number" formControlName="cantidadPasajes" min="1">
+    </div>
+
+    <div class="form-group">
+      <label>Precio ($)</label>
+      <input type="number" formControlName="precio" min="0" step="0.01">
+    </div>
+
+    <div class="full-width" *ngIf="error">
+      <div class="alert alert-danger">{{ error }}</div>
+    </div>
+
+    <div class="full-width actions">
+      <button type="submit" class="btn-primary" [disabled]="enviando || formReserva.invalid">
+        {{ enviando ? 'Guardando...' : '💾 Guardar Reserva' }}
+      </button>
+    </div>
+
+  </form>
+</div>
